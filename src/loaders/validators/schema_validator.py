@@ -7,24 +7,32 @@ def validate_required_columns(
     required_columns: List[str]
 ) -> None:
     """
-    (Função de Validação -> Sem retorno)
-    Valida se o DataFrame contém todas as colunas obrigatórias.
+    Valida se o DataFrame contém todas as colunas obrigatórias
+    e se elas possuem ao menos um valor não nulo.
     
-    :param df: DataFrame carregado
-    :param required_columns: Lista de colunas obrigatórias
-    :raises ValueError: se alguma coluna estiver ausente -> Falha por excessão
+    (Falha por exceção)
     """
-    
-    # Colunas existentes no DataFrame
+
     df_columns = set(df.columns)
-    
-    # Colunas obrigatórias
     required = set(required_columns)
-    
-    # Diferença: o que é obrigatório e não existe no DF
+
     missing_columns = required - df_columns
-    
+
     if missing_columns:
         raise ValueError(
-            f"Colunas obrigatórias ausentes: {sorted(missing_columns)}"
+            "Validação de schema falhou.\n"
+            f"Colunas obrigatórias ausentes: {sorted(missing_columns)}\n"
+            f"Colunas encontradas: {sorted(df_columns)}"
+        )
+
+    # Verifica colunas vazias (100% nulas)
+    empty_columns = [
+        col for col in required
+        if df[col].isna().all()
+    ]
+
+    if empty_columns:
+        raise ValueError(
+            "Validação de schema falhou.\n"
+            f"Colunas obrigatórias sem dados: {sorted(empty_columns)}"
         )
