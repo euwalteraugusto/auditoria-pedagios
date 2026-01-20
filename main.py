@@ -35,7 +35,7 @@ def preprocess_for_audit(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     caminho_arquivo = (
-        r"V:\T_Embarcada\#PEDAGIO\QUIMICO\LANÇADAS\FATURAS EXCEL\SEM PARAR_ FATURA QUIMICO 30.10.2025.xlsx"
+        r"V:\T_Embarcada\#PEDAGIO\QUIMICO\SEM PARAR_ FATURA QUIMICO 20.01.2026.xlsx"
     )
     aba = "PASSAGENS PEDÁGIO"
     
@@ -75,7 +75,7 @@ def main():
     print(f"Valor efetivamente recuperável: R$ {recoverable_value:,.2f}")
 
     # 8. Exportação
-    output_file = "relatorio_auditoria_pedagio.xlsx"
+    output_file = "RELATÓRIO AUDITORIA SEM PARAR_ FATURA QUIMICO 20.01.2026.xlsx"
 
     export_audit_report(
         output_path=output_file,
