@@ -1,5 +1,13 @@
 import pandas as pd
-
+"""
+Importa funções para:
+- Carregar arquivo
+- Validar colunas obrigatórias
+- Normalizar dados
+- Encontrar passagens duplicadas
+- Calcular valor recuperável
+- Exportar relatório de auditoria
+"""
 from src.loaders.file_loader import load_file
 from src.loaders.validators.schema_validator import validate_required_columns
 from src.loaders.validators.processors.normalizer import normalize_dataframe
@@ -7,7 +15,7 @@ from src.audit.rules.duplicate_passages import find_duplicate_passages
 from src.audit.rules.recoverable_value import calculate_recoverable_value
 from src.exporters.excel_exporter import export_audit_report
 
-# Colunas obrigatórias após normalização
+# Lista de Colunas obrigatórias após normalização
 REQUIRED_COLUMNS = [
     "PLACA",
     "DATA PASSAGEM",
@@ -31,7 +39,6 @@ def preprocess_for_audit(df: pd.DataFrame) -> pd.DataFrame:
     raise ValueError(
             "Colunas obrigatórias PLACA e/ou DATA PASSAGEM ausentes para auditoria."
         )
-
 
 def main():
     caminho_arquivo = (
@@ -87,7 +94,6 @@ def main():
     )
 
     print(f"Relatório exportado com sucesso: {output_file}")
-
 
 if __name__ == "__main__":
     main()
