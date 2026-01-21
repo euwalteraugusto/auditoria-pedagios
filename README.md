@@ -1,172 +1,187 @@
-🚧 Auditoria Automatizada de Pedágios
+# 🚧 Auditoria Automatizada de Pedágios -> Projeto inicial
 
-Solução em Python para automatizar a auditoria de faturas de pedágio, identificando passagens duplicadas, calculando valores recuperáveis e gerando relatórios estruturados em Excel.
-O projeto foi desenvolvido com foco em confiabilidade financeira, reutilização mensal e arquitetura modular.
+Solução desenvolvida em **Python** para automatizar a auditoria de faturas de pedágio, identificando passagens duplicadas, calculando valores recuperáveis e gerando relatórios estruturados em **Excel**.
 
-📌 Visão Geral
+O projeto foi concebido com foco em **confiabilidade financeira**, **reutilização mensal**, **clareza de regras de negócio** e **arquitetura modular**, sendo aplicável tanto em contextos corporativos quanto como projeto de portfólio em **automação, dados e back-end**.
 
-Auditorias manuais de faturas de pedágio são suscetíveis a erros, retrabalho e perda financeira.
-Este projeto automatiza esse processo ao:
+---
 
-Normalizar dados de diferentes fontes
+## 📌 Visão Geral
 
-Validar a estrutura das informações
+Auditorias manuais de faturas de pedágio são processos suscetíveis a:
 
-Aplicar regras de auditoria
+* Erros humanos
+* Retrabalho operacional
+* Falhas de conferência
+* Perda financeira recorrente
 
-Consolidar resultados em relatórios claros e auditáveis
+Este projeto automatiza o processo de auditoria ao:
 
-A solução é adequada tanto para uso corporativo quanto para estudos e portfólio em automação e análise de dados.
+* Normalizar dados provenientes de diferentes fontes
+* Validar a estrutura e integridade das informações
+* Aplicar regras claras de auditoria
+* Consolidar resultados em relatórios claros, rastreáveis e auditáveis
 
-⚙️ Funcionalidades
+A solução foi desenhada para ser **executada mensalmente**, com mínimo ajuste e alto grau de confiabilidade.
 
-📂 Leitura de faturas e relatórios em Excel
+---
 
-🔄 Normalização e padronização de dados
+## ⚙️ Funcionalidades
 
-✅ Validação de colunas obrigatórias
+* 📂 Leitura de faturas e relatórios em Excel
+* 🔄 Normalização e padronização de dados
+* ✅ Validação de colunas obrigatórias (schema validation)
+* 🔍 Identificação de passagens duplicadas
+* 💰 Cálculo de valores duplicados e valores recuperáveis
+* 📊 Exportação de relatório final estruturado em Excel
+* 🧱 Arquitetura modular, reutilizável e orientada a regras de negócio
 
-🔍 Identificação de passagens duplicadas
+---
 
-💰 Cálculo de valores duplicados e recuperáveis
+## 🛠️ Tecnologias Utilizadas
 
-📊 Exportação de relatório final em Excel
+* **Python 3**
+* **pandas**
+* **openpyxl**
+* **Microsoft Excel**
 
-🧱 Arquitetura modular e reutilizável
+---
 
-🛠️ Tecnologias Utilizadas
+## 🧱 Estrutura do Projeto
 
-Python 3
-
-pandas
-
-openpyxl
-
-Excel
-
-🧱 Estrutura do Projeto
+```text
 auditoria-pedagios/
 │
 ├── main.py
-│
 ├── src/
 │   ├── loaders/
-│   │   ├── file_loader.py
-│   │   └── validators/
-│   │       ├── schema_validator.py
-│   │       └── processors/
-│   │           └── normalizer.py
-│   │
+│   │   └── file_loader.py
+│   ├── validators/
+│   │   └── schema_validator.py
+│   ├── processors/
+│   │   └── normalizer.py
 │   ├── audit/
 │   │   └── rules/
 │   │       ├── duplicate_passages.py
 │   │       └── recoverable_value.py
-│   │
 │   └── exporters/
 │       └── excel_exporter.py
 │
 └── README.md
+```
 
-🔄 Fluxo de Execução
+A separação por camadas facilita manutenção, testes, evolução das regras e reaproveitamento do código.
 
-Carregamento do arquivo Excel
+---
 
-Normalização dos dados
+## 🔄 Fluxo de Execução
 
-Validação do schema
+1. Carregamento do arquivo Excel
+2. Normalização e padronização dos dados
+3. Validação do schema
+4. Pré-processamento para auditoria
+5. Identificação de duplicidades
+6. Cálculo do valor recuperável
+7. Exportação do relatório final
 
-Pré-processamento para auditoria
+---
 
-Identificação de duplicidades
+## 📑 Colunas Obrigatórias
 
-Cálculo do valor recuperável
+Após a normalização, o `DataFrame` deve conter obrigatoriamente as seguintes colunas:
 
-Exportação do relatório final
+* `PLACA`
+* `DATA`
+* `PASSAGEM`
+* `PRAÇA`
+* `VALOR`
 
-📑 Colunas Obrigatórias
+A ausência de qualquer uma dessas colunas **interrompe a execução**, garantindo a integridade e a confiabilidade da auditoria.
 
-Após a normalização, o DataFrame deve conter:
+---
 
-PLACA
-DATA PASSAGEM
-PRAÇA
-VALOR
+## ▶️ Como Executar
 
+### 1. Clone o repositório
 
-A ausência de qualquer uma dessas colunas interrompe a execução, garantindo integridade da auditoria.
-
-▶️ Como Executar
-1. Clone o repositório
+```bash
 git clone https://github.com/seu-usuario/auditoria-pedagios.git
 cd auditoria-pedagios
+```
 
-2. Crie um ambiente virtual (opcional)
+### 2. Crie um ambiente virtual (opcional)
+
+```bash
 python -m venv venv
-source venv/bin/activate  # Linux / macOS
-venv\Scripts\activate     # Windows
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
+```
 
-3. Instale as dependências
+### 3. Instale as dependências
+
+```bash
 pip install pandas openpyxl
+```
 
-4. Configure o arquivo de entrada
+### 4. Configure o arquivo de entrada
 
-No main.py, ajuste:
+No arquivo `main.py`, ajuste:
 
+```python
 caminho_arquivo = r"C:\caminho\para\fatura.xlsx"
 aba = "PASSAGENS PEDÁGIO"
+```
 
-5. Execute o projeto
+### 5. Execute o projeto
+
+```bash
 python main.py
+```
 
-📤 Saída Gerada
+---
+
+## 📤 Saída Gerada
 
 O script gera um arquivo Excel contendo:
 
-Base completa das passagens
+* Base completa das passagens
+* Passagens duplicadas identificadas
+* Valores duplicados
+* Valores efetivamente recuperáveis
+* Totais consolidados para auditoria financeira
 
-Passagens duplicadas identificadas
+**Exemplo de arquivo gerado:**
 
-Valores duplicados
+```
+RELATORIO_AUDITORIA_SEM_PARAR_FATURA_20_01_2026.xlsx
+```
 
-Valores efetivamente recuperáveis
+---
 
-Totais consolidados para auditoria
+## 📈 Benefícios
 
-Exemplo:
+* Redução significativa de erros manuais
+* Mitigação de riscos financeiros recorrentes
+* Padronização do processo de auditoria
+* Facilidade de manutenção e evolução
+* Código limpo, legível e orientado a regras de negócio
 
-RELATÓRIO AUDITORIA SEM PARAR_ FATURA QUIMICO 20.01.2026.xlsx
+---
 
-📈 Benefícios
+## 🚀 Possíveis Evoluções
 
-Redução de erros manuais
+* Suporte a múltiplos layouts de faturas
+* Parametrização dinâmica das regras de auditoria
+* Interface CLI interativa
+* Integração com banco de dados
+* Logs estruturados e versionamento das execuções
 
-Mitigação de riscos financeiros
+---
 
-Padronização do processo de auditoria
+## 👤 Autor
 
-Facilidade de manutenção e evolução
+**Walter Fonseca**  
+Estudante de Engenharia de Software / TI  
+Foco em **Back-End**, **Automação** e **Análise de Dados**
 
-Código limpo, legível e orientado a regras de negócio
-
-🚀 Possíveis Evoluções
-
-Suporte a múltiplos layouts de faturas
-
-Parametrização das regras de auditoria
-
-Interface CLI interativa
-
-Integração com banco de dados
-
-Logs estruturados e versionamento de execuções
-
-📄 Licença
-
-Este projeto está sob a licença MIT.
-Sinta-se à vontade para usar, modificar e contribuir.
-
-👤 Autor
-
-Guto
-Estudante de Engenharia de Software / TI
-Foco em Back-End, Automação e Análise de Dados
+---
