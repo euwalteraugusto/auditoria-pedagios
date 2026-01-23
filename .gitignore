@@ -10,3 +10,7 @@ logs/
 
 # Arquivos temporários
 .env
+
+# Ignorar todos os arquivos Excel
+*.xlsx
+*.xls
