@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 """
 Importa funções para:
 - Carregar arquivo
@@ -42,7 +43,7 @@ def preprocess_for_audit(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     caminho_arquivo = (
-        r"V:\T_Embarcada\#PEDAGIO\QUIMICO\SEM PARAR_ FATURA QUIMICO 20.01.2026.xlsx"
+        r"V:\T_Embarcada\#PEDAGIO\QUIMICO\SEM PARAR_ FATURA QUIMICO 30.01.2026.xlsx"
     )
     aba = "PASSAGENS PEDÁGIO"
     
@@ -82,7 +83,8 @@ def main():
     print(f"Valor efetivamente recuperável: R$ {recoverable_value:,.2f}")
 
     # 8. Exportação
-    output_file = "RELATÓRIO AUDITORIA SEM PARAR_ FATURA QUIMICO 20.01.2026.xlsx"
+    output_file = "RELATÓRIO AUDITORIA {}.xlsx".format(nome_base := os.path.splitext(
+        os.path.basename(caminho_arquivo))[0])
 
     export_audit_report(
         output_path=output_file,
